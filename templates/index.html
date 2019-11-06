@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+      
+    <nav class="nav justify-content-center p-2 border-bottom" style="width: 100%">
+      <a class="nav-link text-dark" href="https://www.github.com/khanshaheb34">Socket Testing</a>
+    </nav>
+
+    <h1 style="text-align: center; margin: 100px auto; pading: 20px; max-width: 80vw; word-wrap: break-word;" id="realName">Biday PTB!!!!!</h1>
+
+    <input type="text" id="name" class="input-group-text" placeholder="Change the text" oninput="update()" style="margin: 100px auto; width: 50%;"/>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io('http://192.168.31.65:8000');
+
+      socket.on('message change req', function (data) {
+        console.log(data);
+        let realName = document.getElementById("realName");
+        let thisName = document.getElementById("name");
+        thisName.value = data.name;
+        realName.innerHTML = data.name;
+      });
+
+      function update() {
+        let realName = document.getElementById("realName");
+        let thisName = document.getElementById("name").value;
+        realName.innerHTML = thisName;
+        socket.emit('message change', { name: thisName });
+      }
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
