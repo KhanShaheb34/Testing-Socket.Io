@@ -20,7 +20,6 @@ var name = "Baaal";
 
 io.on('connection', socket => {
     socket.on('message change', data => {
-        console.log(data);
         name = data.name;
         socket.broadcast.emit('message change req', { name: name });
     })
